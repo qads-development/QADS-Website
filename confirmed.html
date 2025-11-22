@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Developped by QADS.cloud -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Plan Details</title>
+    <style>
+        :root {
+            --brand-purple: #6a4cff;
+            --brand-purple-hover: #5a3de0;
+            --text-primary: #f0f1f3;
+            --text-secondary: #aeb4c0;
+            --bg-dark: #0c0a10;
+            --border-color: #3a3a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(74, 58, 107, 0.4) 0%, transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(74, 58, 107, 0.3) 0%, transparent 35%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        #loader-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(12, 10, 16, 0.9);
+            backdrop-filter: blur(5px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-radius: 12px;
+        }
+
+        #loader-section .container {
+            --uib-size: 55px;
+            --uib-color: var(--text-primary);
+            --uib-speed: 0.8s;
+            --uib-bg-opacity: .1;
+            height: calc(var(--uib-size) * (2.1 / 5));
+            width: var(--uib-size);
+            transform-origin: center;
+            overflow: visible;
+        }
+
+        #loader-section .car {
+            fill: none;
+            stroke: var(--uib-color);
+            stroke-dasharray: 15, 85;
+            stroke-dashoffset: 0;
+            stroke-linecap: round;
+            animation: travel var(--uib-speed) linear infinite;
+            will-change: stroke-dasharray, stroke-dashoffset;
+            transition: stroke 0.5s ease;
+        }
+
+        #loader-section .track {
+            stroke: var(--uib-color);
+            opacity: var(--uib-bg-opacity);
+        }
+
+        @keyframes travel {
+            0% {
+                stroke-dashoffset: 0;
+            }
+            100% {
+                stroke-dashoffset: 100;
+            }
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 650px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 3rem;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 6px;
+            background-color: var(--border-color);
+            border-radius: 3px;
+            margin-bottom: 2.5rem;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--brand-purple);
+            border-radius: 3px;
+            transition: width 0.4s ease-out;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-step h2 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .form-step p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="url"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 14px 18px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--brand-purple);
+            box-shadow: 0 0 0 3px rgba(106, 76, 255, 0.3);
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23aeb4c0' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            cursor: pointer;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            display: none;
+        }
+
+        .checkbox-item label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            padding-left: 2rem;
+            display: flex;
+            align-items: center;
+            min-height: 24px;
+        }
+
+        .checkbox-item label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+            transition: background-color 0.2s, border-color 0.2s;
+        }
+
+        .checkbox-item label::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 50%;
+            transform: translateY(-60%) rotate(45deg);
+            width: 6px;
+            height: 12px;
+            border: solid var(--text-primary);
+            border-width: 0 2px 2px 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label::before {
+            background-color: var(--brand-purple);
+            border-color: var(--brand-purple);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label::after {
+            opacity: 1;
+        }
+
+        .conditional-field {
+            display: none;
+            margin-top: 1rem;
+            animation: fadeIn 0.3s;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-btn#prevBtn {
+            visibility: hidden;
+        }
+
+        .nav-btn#nextBtn {
+            background-color: var(--brand-purple);
+            color: var(--text-primary);
+        }
+
+        .nav-btn#nextBtn:hover {
+            background-color: var(--brand-purple-hover);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="progress-bar-container" id="progressBarContainer">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <form id="multiStepForm">
+            <div class="form-step active" data-step="1">
+                <h2>What is your business name?</h2>
+                <p>Let's get started by learning what to call you.</p>
+                <div class="form-group">
+                    <input type="text" id="businessName" name="businessName" placeholder="e.g., Acme Inc." required>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="2">
+                <h2>What's your business website?</h2>
+                <p>Please provide your company's primary web address.</p>
+                <div class="form-group">
+                    <input type="url" id="businessWebsite" name="businessWebsite" placeholder="https://www.example.com" required>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="3">
+                <h2>What is your business sector?</h2>
+                <p>This helps us understand your industry.</p>
+                <div class="form-group">
+                    <select id="businessSector" name="businessSector" required>
+                        <option value="" disabled selected>Select your industry...</option>
+                        <option value="technology">Technology, SaaS</option>
+                        <option value="ecommerce">E-commerce, Retail</option>
+                        <option value="finance">Finance, Insurtech</option>
+                        <option value="health">Healthcare, Wellness</option>
+                        <option valueA="media">Media, Entertainment</option>
+                        <option value="hospitality">Hospitality, Travel</option>
+                        <option value="real_estate">Real Estate</option>
+                        <option value="education">Education</option>
+                        <option value="non_profit">Non-profit</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="4">
+                <h2>What is your annual business revenue?</h2>
+                <p>This gives us a sense of your company's scale.</p>
+                <div class="form-group">
+                    <select id="revenue" name="revenue" required>
+                        <option value="" disabled selected>Select a revenue range...</option>
+                        <option value="<100k">&lt; $100,000</option>
+                        <option value="100k-500k">$100,000 - $500,000</option>
+                        <option value="500k-1m">$500,000 - $1,000,000</option>
+                        <option value="1m-5m">$1M - $5M</option>
+                        <option value="5m+">$5M+</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="5">
+                <h2>What are your goals with our platform?</h2>
+                <p>Tell us what you're hoping to achieve.</p>
+                <div class="form-group">
+                    <select id="goals" name="goals" required>
+                        <option value="" disabled selected>Choose a primary goal...</option>
+                        <option value="brand_image">Better brand image</option>
+                        <option value="more_customers">More customers</option>
+                        <option value="custom">Custom (Please specify)</option>
+                    </select>
+                </div>
+                <div class="form-group conditional-field" id="customGoalField">
+                    <textarea id="customGoalText" name="customGoalText" placeholder="Please describe your custom goal..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="6">
+                <h2>What do you wish to do with us?</h2>
+                <p>Select all services you are interested in.</p>
+                <div class="form-group checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="serviceWebsite" name="services" value="website">
+                        <label for="serviceWebsite">Website</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="serviceCheckout" name="services" value="checkout">
+                        <label for="serviceCheckout">Checkout</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="serviceAccounts" name="services" value="accounts">
+                        <label for="serviceAccounts">Accounts / Login Systems</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="serviceOther" name="services" value="other">
+                        <label for="serviceOther">Other (Please specify)</label>
+                    </div>
+                </div>
+                <div class="form-group conditional-field" id="otherServiceField">
+                    <textarea id="otherServiceText" name="otherServiceText" placeholder="Please describe the other services..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="7">
+                <h2>What is your email?</h2>
+                <p>We'll use this to contact you about your submission.</p>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                </div>
+            </div>
+
+            <div class="form-step" data-step="8">
+                <h2>What is your job title?</h2>
+                <p>This helps us direct your inquiry.</p>
+                <div class="form-group">
+                    <input type="text" id="jobTitle" name="jobTitle" placeholder="e.g., CEO, Marketing Manager" required>
+                </div>
+            </div>
+            
+            <div class="form-step" data-step="9">
+                <h2 style="text-align: center;">Thank You!</h2>
+                <p style="text-align: center; font-size: 1.2rem;">Your submission has been received.<br>We will be in touch shortly.</p>
+            </div>
+        </form>
+
+        <div class="form-navigation" id="formNavigation">
+            <button type="button" class="nav-btn" id="prevBtn">← Previous</button>
+            <button type="button" class="nav-btn" id="nextBtn">Next →</button>
+        </div>
+
+        <div id="loader-section">
+            <svg class="container" x="0px" y="0px" viewBox="0 0 55 23.1" height="23.1" width="55" preserveAspectRatio='xMidYMid meet'>
+                <path class="track" fill="none" stroke-width="4" pathlength="100" d="M26.7,12.2c3.5,3.4,7.4,7.8,12.7,7.8c5.5,0,9.6-4.4,9.6-9.5C49,5,45.1,1,39.8,1c-5.5,0-9.5,4.2-13.1,7.8l-3.4,3.3c-3.6,3.6-7.6,7.8-13.1,7.8C4.9,20,1,16,1,10.5C1,5.4,5.1,1,10.6,1c5.3,0,9.2,4.5,12.7,7.8L26.7,12.2z" />
+                <path class="car" fill="none" stroke-width="4" pathlength="100" d="M26.7,12.2c3.5,3.4,7.4,7.8,12.7,7.8c5.5,0,9.6-4.4,9.6-9.5C49,5,45.1,1,39.8,1c-5.5,0-9.5,4.2-13.1,7.8l-3.4,3.3c-3.6,3.6-7.6,7.8-13.1,7.8C4.9,20,1,16,1,10.5C1,5.4,5.1,1,10.6,1c5.3,0,9.2,4.5,12.7,7.8L26.7,12.2z" />
+            </svg>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbytQ_pF7PbAiTQ6horXCJBVJhHqDt8J3auM5zahaUEu6SiJRP2jQoPB_B-4mpa2sTCZ/exec';
+            
+            const steps = Array.from(document.querySelectorAll('.form-step'));
+            const nextBtn = document.getElementById('nextBtn');
+            const prevBtn = document.getElementById('prevBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressBarContainer = document.getElementById('progressBarContainer');
+            const loaderSection = document.getElementById('loader-section');
+            const formNavigation = document.getElementById('formNavigation');
+
+            const thankYouStepIndex = steps.findIndex(step => step.dataset.step === '9');
+            const totalQuestionSteps = thankYouStepIndex; 
+            let currentStep = 0;
+
+            if (localStorage.getItem('formSubmitted') === 'true') {
+                steps.forEach(step => step.classList.remove('active'));
+                steps[thankYouStepIndex].classList.add('active');
+                progressBarContainer.style.display = 'none';
+                formNavigation.style.display = 'none';
+                return;
+            }
+
+            function showStep(stepIndex) {
+                steps.forEach((step, index) => {
+                    step.classList.toggle('active', index === stepIndex);
+                });
+
+                let progress;
+                if (stepIndex >= thankYouStepIndex) {
+                    progress = 100;
+                } else {
+                    progress = (stepIndex / totalQuestionSteps) * 100;
+                }
+                progressBar.style.width = `${progress}%`;
+
+                prevBtn.style.visibility = (stepIndex === 0 || stepIndex === thankYouStepIndex) ? 'hidden' : 'visible';
+
+                if (stepIndex === totalQuestionSteps - 1) {
+                    nextBtn.textContent = 'Submit';
+                } else if (stepIndex === thankYouStepIndex) {
+                    formNavigation.style.display = 'none';
+                } else {
+                    nextBtn.textContent = 'Next →';
+                }
+            }
+            
+            function validateStep(stepIndex) {
+                const currentStepElement = steps[stepIndex];
+                const inputs = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
+                let isValid = true;
+                
+                inputs.forEach(input => {
+                    const conditionalParent = input.closest('.conditional-field');
+                    if (!conditionalParent || conditionalParent.style.display === 'block') {
+                        if (!input.value) {
+                            isValid = false;
+                            input.style.borderColor = 'red';
+                        } else {
+                            input.style.borderColor = 'var(--border-color)';
+                        }
+                    }
+                });
+
+                const checkboxGroups = [
+                    { name: 'services', step: 6 },
+                    { name: 'platforms', step: 9 }
+                ];
+                
+                const currentGroup = checkboxGroups.find(group => parseInt(currentStepElement.dataset.step) === group.step);
+                
+                if (currentGroup) {
+                    const checkboxes = currentStepElement.querySelectorAll(`input[name="${currentGroup.name}"]`);
+                    const isChecked = Array.from(checkboxes).some(cb => cb.checked);
+                    if (!isChecked) {
+                        isValid = false;
+                        currentStepElement.querySelector('p').style.color = 'red';
+                    } else {
+                        currentStepElement.querySelector('p').style.color = 'var(--text-secondary)';
+                    }
+                }
+                
+                return isValid;
+            }
+
+            function showLoaderAndAdvance() {
+                loaderSection.style.display = 'flex';
+                setTimeout(() => {
+                    loaderSection.style.display = 'none';
+                    currentStep++;
+                    showStep(currentStep);
+                }, 1000);
+            }
+
+            function handleFormSubmit() {
+                if (WEBHOOK_URL === 'null') {
+                    alert('Maintenance undergoing. Please try later');
+                    loaderSection.style.display = 'none';
+                    return;
+                }
+                
+                loaderSection.style.display = 'flex';
+
+                const data = {
+                    businessName: document.getElementById('businessName').value,
+                    businessWebsite: document.getElementById('businessWebsite').value,
+                    businessSector: document.getElementById('businessSector').value,
+                    revenue: document.getElementById('revenue').value,
+                    goals: document.getElementById('goals').value,
+                    customGoalText: document.getElementById('customGoalText').value,
+                    email: document.getElementById('email').value,
+                    jobTitle: document.getElementById('jobTitle').value,
+                    services: Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value),
+                    otherServiceText: document.getElementById('otherServiceText').value,
+                    platforms: Array.from(document.querySelectorAll('input[name="platforms"]:checked')).map(cb => cb.value)
+                };
+
+                fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                      'Content-Type': 'text/plain',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(result => {
+                    localStorage.setItem('formSubmitted', 'true');
+                    showLoaderAndAdvance();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    localStorage.setItem('formSubmitted', 'true');
+                    showLoaderAndAdvance();
+                });
+            }
+
+            nextBtn.addEventListener('click', () => {
+                const isValid = validateStep(currentStep);
+
+                if (isValid) {
+                    if (currentStep === totalQuestionSteps - 1) {
+                        handleFormSubmit();
+                    } else {
+                        showLoaderAndAdvance();
+                    }
+                } else {
+                    const currentStepElement = steps[currentStep];
+                    currentStepElement.style.animation = 'shake 0.3s';
+                    setTimeout(() => {
+                        currentStepElement.style.animation = '';
+                    }, 300);
+                }
+            });
+
+            prevBtn.addEventListener('click', () => {
+                currentStep--;
+                showStep(currentStep);
+            });
+
+            const goalsSelect = document.getElementById('goals');
+            const customGoalField = document.getElementById('customGoalField');
+            const customGoalText = document.getElementById('customGoalText');
+
+            goalsSelect.addEventListener('change', () => {
+                if (goalsSelect.value === 'custom') {
+                    customGoalField.style.display = 'block';
+                    customGoalText.setAttribute('required', 'required');
+                } else {
+                    customGoalField.style.display = 'none';
+                    customGoalText.removeAttribute('required');
+                }
+            });
+
+            const otherServiceCheckbox = document.getElementById('serviceOther');
+            const otherServiceField = document.getElementById('otherServiceField');
+            const otherServiceText = document.getElementById('otherServiceText');
+
+            otherServiceCheckbox.addEventListener('change', () => {
+                if (otherServiceCheckbox.checked) {
+                    otherServiceField.style.display = 'block';
+                    otherServiceText.setAttribute('required', 'required');
+                } else {
+                    otherServiceField.style.display = 'none';
+                    otherServiceText.removeAttribute('required');
+                }
+            });
+
+            showStep(currentStep);
+        });
+    </script>
+
+</body>
+</html>
