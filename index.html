@@ -26,20 +26,19 @@
             </script>
             <script>
                 (function() {
-                    const urlParams = new URLSearchParams(window.location.search);
-                    if (urlParams.get('verification_status') === 'true') {
+                    if (window.location.href.includes('verification_status=true')) {
+                        
                         localStorage.setItem('_verified-qadsid', 'True');
-                        
-                        urlParams.delete('verification_status');
-                        const newQuery = urlParams.toString();
-                        const newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '');
-                        window.history.replaceState({}, document.title, newUrl);
-                        
-                        return;
+            
+                        const newUrl = window.location.href.replace(/[\?&]verification_status=true/, '');
+                        window.location.href = newUrl; 
+                        return; 
                     }
             
                     if (localStorage.getItem('_verified-qadsid') !== 'True') {
-                        const currentPage = encodeURIComponent(window.location.href);
+                        
+                        const currentPage = 'index.html';
+                        
                         window.location.href = 'https://id.qads.cloud/?currentpage=' + currentPage;
                     }
                 })();
