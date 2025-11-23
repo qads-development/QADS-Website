@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QADS Security Widget</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .widget-container {
+            background-color: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 3px;
+            box-shadow: 0 1px 1px rgba(0,0,0,0.08);
+            width: 300px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            box-sizing: border-box;
+            position: relative;
+            justify-content: space-between;
+        }
+
+        .status-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            height: 100%;
+            flex-grow: 1;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #dfe6e9;
+            border-top: 2px solid #6c5ce7;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-icon {
+            display: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            animation: popIn 0.3s ease-out;
+        }
+
+        .status-icon.success { background-color: #6c5ce7; }
+        .status-icon.failure { background-color: #d63031; }
+
+        .icon-symbol {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0); }
+            80% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #2d3436;
+            font-weight: 500;
+            cursor: default;
+        }
+
+        #checkbox-wrapper {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            background-color: #fff;
+            border: 2px solid #b2bec3;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox:hover { border-color: #636e72; }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: #2d3436;
+            cursor: pointer;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        .logo-icon {
+            width: 28px;
+            height: 28px;
+            margin-bottom: 2px;
+        }
+        
+        .custom-logo-img {
+            max-height: 28px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            font-size: 9px;
+            color: #b2bec3;
+        }
+
+        .brand-text a {
+            color: #b2bec3;
+            text-decoration: none;
+        }
+        .brand-text a:hover { text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <div class="widget-container">
+        
+        <div class="status-wrapper" id="auto-ui">
+            <div class="spinner" id="spinner"></div>
+
+            <div class="status-icon success" id="icon-success">
+                <span class="icon-symbol">✓</span>
+            </div>
+
+            <div class="status-icon failure" id="icon-failure">
+                <span class="icon-symbol">✕</span>
+            </div>
+
+            <span class="status-text" id="main-text">Verifying...</span>
+        </div>
+
+        <div id="checkbox-wrapper">
+            <div class="custom-checkbox" id="manual-check-box"></div>
+            <span class="checkbox-label" id="manual-check-label">Verify you're a human</span>
+        </div>
+
+        <div class="logo-wrapper">
+            <img src="qads.png" alt="QADS" class="custom-logo-img" onerror="this.style.display='none'"> 
+            <div class="brand-text">
+                <a href="https://qads.cloud" target="_blank">QADS ID</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const SecuritySystem = {
+            score: 0,
+            checkAll: function() {
+                this.score = 0;
+                if (navigator.webdriver) this.score += 100;
+                const ua = navigator.userAgent.toLowerCase();
+                if (['headless', 'bot', 'crawl', 'spider'].some(b => ua.includes(b))) this.score += 100;
+                if (window.outerWidth === 0 || window.innerWidth === 0) this.score += 50;
+                if (!navigator.plugins || navigator.plugins.length === 0) this.score += 10;
+                
+                return this.score;
+            }
+        };
+
+        const autoUI = document.getElementById('auto-ui');
+        const checkboxUI = document.getElementById('checkbox-wrapper');
+        const spinner = document.getElementById('spinner');
+        const successIcon = document.getElementById('icon-success');
+        const failIcon = document.getElementById('icon-failure');
+        const mainText = document.getElementById('main-text');
+        
+        const manualCheckbox = document.getElementById('manual-check-box');
+        const manualLabel = document.getElementById('manual-check-label');
+
+
+        function showSuccess() {
+            spinner.style.display = 'none';
+            successIcon.style.display = 'flex';
+            mainText.innerText = "Connection verified";
+            mainText.style.color = "#6c5ce7";
+            
+            checkboxUI.style.display = 'none';
+            autoUI.style.display = 'flex';
+
+            window.parent.postMessage({
+                action: 'QADS_VERIFY_SUCCESS',
+                token: 'VERIFIED_TRUE'
+            }, '*');
+        }
+
+        function showFailure() {
+            spinner.style.display = 'none';
+            failIcon.style.display = 'flex';
+            mainText.innerText = "Blocked";
+            mainText.style.color = "#d63031";
+        }
+
+        function triggerSoftFail() {
+            autoUI.style.display = 'none';
+            checkboxUI.style.display = 'flex';
+
+            const verifyAction = () => {
+                checkboxUI.style.display = 'none';
+                autoUI.style.display = 'flex';
+                spinner.style.display = 'block';
+                mainText.innerText = "Verifying...";
+                mainText.style.color = "#2d3436";
+
+                setTimeout(showSuccess, 6000);
+            };
+
+            manualCheckbox.addEventListener('click', verifyAction);
+            manualLabel.addEventListener('click', verifyAction);
+        }
+
+        window.addEventListener('load', () => {
+            
+            setTimeout(() => {
+                const score = SecuritySystem.checkAll();
+
+                if (score >= 100) {
+                    showFailure();
+                } else if (score >= 50) {
+                    triggerSoftFail();
+                } else {
+                    showSuccess();
+                }
+            }, 6000); 
+        });
+
+    </script>
+</body>
+</html>
