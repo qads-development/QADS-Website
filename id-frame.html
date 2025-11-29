@@ -33,7 +33,7 @@
         }
 
         .status-wrapper {
-            display: flex;
+            display: none; 
             align-items: center;
             gap: 12px;
             height: 100%;
@@ -87,7 +87,7 @@
         }
 
         #checkbox-wrapper {
-            display: none;
+            display: flex;
             align-items: center;
             gap: 10px;
             width: 100%;
@@ -164,19 +164,38 @@
 
         <div id="checkbox-wrapper">
             <div class="custom-checkbox" id="manual-check-box"></div>
-            <span class="checkbox-label" id="manual-check-label">Verify you're a human</span>
+            <span class="checkbox-label" id="manual-check-label">Verify you are human</span>
         </div>
 
         <div class="logo-wrapper">
             <img src="qads.png" alt="QADS" class="custom-logo-img" onerror="this.style.display='none'"> 
             <div class="brand-text">
-                <a href="https://qads.cloud" target="_blank">QADS.cloud</a>
+                <a href="https://qads.cloud/" target="_blank">QADS.cloud</a>
             </div>
         </div>
 
     </div>
 
     <script>
+        const content = {
+            en: {
+                verifyLabel: "Verify your connection",
+                verifying: "Verifying...",
+                success: "Connection verified",
+                blocked: "Verification failed, try again."
+            },
+            fr: {
+                verifyLabel: "Vérifier votre connection",
+                verifying: "Vérification...",
+                success: "Connexion vérifiée",
+                blocked: "Vérification échoué"
+            }
+        };
+        
+        const userLang = navigator.language || navigator.userLanguage; 
+        const lang = (userLang && userLang.toLowerCase().startsWith('fr')) ? 'fr' : 'en';
+        const txt = content[lang];
+
         const SecuritySystem = {
             score: 0,
             checkAll: function() {
@@ -184,7 +203,9 @@
                 if (navigator.webdriver) this.score += 100;
                 const ua = navigator.userAgent.toLowerCase();
                 if (['headless', 'bot', 'crawl', 'spider'].some(b => ua.includes(b))) this.score += 100;
+                
                 if (window.outerWidth === 0 || window.innerWidth === 0) this.score += 50;
+                
                 if (!navigator.plugins || navigator.plugins.length === 0) this.score += 10;
                 
                 return this.score;
@@ -201,11 +222,13 @@
         const manualCheckbox = document.getElementById('manual-check-box');
         const manualLabel = document.getElementById('manual-check-label');
 
+        manualLabel.innerText = txt.verifyLabel;
+        mainText.innerText = txt.verifying;
 
         function showSuccess() {
             spinner.style.display = 'none';
             successIcon.style.display = 'flex';
-            mainText.innerText = "Connection verified";
+            mainText.innerText = txt.success;
             mainText.style.color = "#6c5ce7";
             
             checkboxUI.style.display = 'none';
@@ -218,9 +241,11 @@
         }
 
         function showFailure() {
+            checkboxUI.style.display = 'none'; 
+            autoUI.style.display = 'flex';    
             spinner.style.display = 'none';
             failIcon.style.display = 'flex';
-            mainText.innerText = "Blocked";
+            mainText.innerText = txt.blocked;
             mainText.style.color = "#d63031";
         }
 
@@ -232,10 +257,10 @@
                 checkboxUI.style.display = 'none';
                 autoUI.style.display = 'flex';
                 spinner.style.display = 'block';
-                mainText.innerText = "Verifying...";
+                mainText.innerText = txt.verifying;
                 mainText.style.color = "#2d3436";
 
-                setTimeout(showSuccess, 6000);
+                setTimeout(showSuccess, 3500);
             };
 
             manualCheckbox.addEventListener('click', verifyAction);
@@ -243,18 +268,13 @@
         }
 
         window.addEventListener('load', () => {
-            
-            setTimeout(() => {
-                const score = SecuritySystem.checkAll();
+            const score = SecuritySystem.checkAll();
 
-                if (score >= 100) {
-                    showFailure();
-                } else if (score >= 50) {
-                    triggerSoftFail();
-                } else {
-                    showSuccess();
-                }
-            }, 6000); 
+            if (score >= 100) {
+                showFailure();
+            } else {
+                triggerSoftFail();
+            }
         });
 
     </script>
