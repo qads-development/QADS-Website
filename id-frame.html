@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://js.qads.cloud/v3/src/id/frame.js">
     <title>QADS Security Widget</title>
     <style>
         body {
@@ -33,7 +34,7 @@
         }
 
         .status-wrapper {
-            display: none; 
+            display: none;
             align-items: center;
             gap: 12px;
             height: 100%;
@@ -118,12 +119,6 @@
             justify-content: center;
             margin-left: 10px;
         }
-
-        .logo-icon {
-            width: 56px;
-            height: 56px;
-            margin-bottom: 2px;
-        }
         
         .custom-logo-img {
             max-height: 22px;
@@ -164,7 +159,7 @@
 
         <div id="checkbox-wrapper">
             <div class="custom-checkbox" id="manual-check-box"></div>
-            <span class="checkbox-label" id="manual-check-label">Verify you are human</span>
+            <span class="checkbox-label" id="manual-check-label">Verify your connection</span>
         </div>
 
         <div class="logo-wrapper">
@@ -182,16 +177,16 @@
                 verifyLabel: "Verify your connection",
                 verifying: "Verifying...",
                 success: "Connection verified",
-                blocked: "Verification failed, try again."
+                blocked: "Connection blocked, try again."
             },
             fr: {
                 verifyLabel: "Vérifier votre connection",
                 verifying: "Vérification...",
                 success: "Connexion vérifiée",
-                blocked: "Vérification échoué"
+                blocked: "Réessayez"
             }
         };
-        
+
         const userLang = navigator.language || navigator.userLanguage; 
         const lang = (userLang && userLang.toLowerCase().startsWith('fr')) ? 'fr' : 'en';
         const txt = content[lang];
@@ -203,11 +198,8 @@
                 if (navigator.webdriver) this.score += 100;
                 const ua = navigator.userAgent.toLowerCase();
                 if (['headless', 'bot', 'crawl', 'spider'].some(b => ua.includes(b))) this.score += 100;
-                
                 if (window.outerWidth === 0 || window.innerWidth === 0) this.score += 50;
-                
                 if (!navigator.plugins || navigator.plugins.length === 0) this.score += 10;
-                
                 return this.score;
             }
         };
@@ -225,6 +217,19 @@
         manualLabel.innerText = txt.verifyLabel;
         mainText.innerText = txt.verifying;
 
+        function toggleParentForms(enable) {
+            try {
+                if (window.parent === window) return;
+                const forms = window.parent.document.forms;
+                for (let i = 0; i < forms.length; i++) {
+                    const btns = forms[i].querySelectorAll('button[type="submit"], input[type="submit"]');
+                    btns.forEach(btn => btn.disabled = !enable);
+                }
+            } catch (e) {
+                console.warn('Cross-origin restriction: Use postMessage to disable parent form.');
+            }
+        }
+
         function showSuccess() {
             spinner.style.display = 'none';
             successIcon.style.display = 'flex';
@@ -234,6 +239,8 @@
             checkboxUI.style.display = 'none';
             autoUI.style.display = 'flex';
 
+            toggleParentForms(true);
+
             window.parent.postMessage({
                 action: 'QADS_VERIFY_SUCCESS',
                 token: 'VERIFIED_TRUE'
@@ -241,12 +248,13 @@
         }
 
         function showFailure() {
-            checkboxUI.style.display = 'none'; 
-            autoUI.style.display = 'flex';    
+            checkboxUI.style.display = 'none';
+            autoUI.style.display = 'flex'; 
             spinner.style.display = 'none';
             failIcon.style.display = 'flex';
             mainText.innerText = txt.blocked;
             mainText.style.color = "#d63031";
+            toggleParentForms(false);
         }
 
         function triggerSoftFail() {
@@ -260,7 +268,7 @@
                 mainText.innerText = txt.verifying;
                 mainText.style.color = "#2d3436";
 
-                setTimeout(showSuccess, 3500);
+                setTimeout(showSuccess, 4000);
             };
 
             manualCheckbox.addEventListener('click', verifyAction);
@@ -268,6 +276,7 @@
         }
 
         window.addEventListener('load', () => {
+            toggleParentForms(false);
             const score = SecuritySystem.checkAll();
 
             if (score >= 100) {
