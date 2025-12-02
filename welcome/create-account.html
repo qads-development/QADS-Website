@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | QADS.cloud</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" type="image/x-icon" href="https://qads.cloud/favicon.ico">
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NBB47P39');</script>
+    <style>
+        input { transition: all 0.2s ease-in-out; }
+        .fade-enter { opacity: 0; transform: scale(0.95); }
+        .fade-enter-active { opacity: 1; transform: scale(1); transition: opacity 300ms, transform 300ms; }
+    </style>
+</head>
+<body class="h-full font-sans text-gray-300"> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NBB47P39"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="fixed inset-0 -z-10 transform-gpu overflow-hidden blur-3xl pointer-events-none" aria-hidden="true">
+        <div class="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-20 sm:left-[calc(50%-30rem)]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
+    </div>
+
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+
+        <div id="signup-section" class="sm:mx-auto sm:w-full sm:max-w-md">
+            <h2 class="mb-6 text-center text-xl font-bold leading-9 tracking-tight text-white">Create your account</h2>
+            
+            <form id="registration-form" class="space-y-6">
+                
+                <div class="relative py-2">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-white/10"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <span class="bg-gray-900 px-2 text-sm text-gray-400">Business Info</span>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <h3 class="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-4">Account Type</h3>
+                    
+                    <div class="mb-4">
+                        <select id="account-type" name="account-type" class="block w-full rounded-md border-0 bg-gray-800 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6">
+                            <option value="business">Business</option>
+                            <option value="individual">Individual</option>
+                        </select>
+                    </div>
+
+                    <div id="business-name-container" class="mb-4">
+                        <label for="business-name" class="block text-sm font-medium leading-6 text-white">Business Name</label>
+                        <div class="mt-2">
+                            <input type="text" name="business-name" id="business-name" class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="tax-id" class="block text-sm font-medium leading-6 text-white">Tax ID / Number <span class="text-gray-500 text-xs">(Optional)</span></label>
+                        <div class="mt-2">
+                            <input type="text" name="tax-id" id="tax-id" class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative py-2">
+                    <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                        <div class="w-full border-t border-white/10"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <span class="bg-gray-900 px-2 text-sm text-gray-400">Personal Info</span>
+                    </div>
+                </div>
+
+                <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="first-name" class="block text-sm font-medium leading-6 text-white">First Name</label>
+                            <div class="mt-2">
+                                <input type="text" name="first-name" id="first-name" required class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-sm font-medium leading-6 text-white">Last Name</label>
+                            <div class="mt-2">
+                                <input type="text" name="last-name" id="last-name" required class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium leading-6 text-white">Email address</label>
+                        <div class="mt-2">
+                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-medium leading-6 text-white">Password</label>
+                        <div class="relative mt-2">
+                            <input id="password" name="password" type="password" required class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 pr-10 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                            
+                            <button type="button" id="toggle-password" class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-white focus:outline-none">
+                                <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                                <svg id="eye-slash-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 hidden">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                </svg>
+                            </button>
+                        </div>
+
+                        <ul class="mt-3 space-y-1 text-xs text-gray-500">
+                            <li id="req-length" class="flex items-center gap-2 transition-colors duration-200">
+                                <svg class="w-4 h-4 text-green-500 opacity-0 transition-opacity duration-200 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                At least 8 characters
+                            </li>
+                            <li id="req-capital" class="flex items-center gap-2 transition-colors duration-200">
+                                <svg class="w-4 h-4 text-green-500 opacity-0 transition-opacity duration-200 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                One capital letter
+                            </li>
+                            <li id="req-number" class="flex items-center gap-2 transition-colors duration-200">
+                                <svg class="w-4 h-4 text-green-500 opacity-0 transition-opacity duration-200 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                One number
+                            </li>
+                            <li id="req-special" class="flex items-center gap-2 transition-colors duration-200">
+                                <svg class="w-4 h-4 text-green-500 opacity-0 transition-opacity duration-200 check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                                One special character
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="phone" class="block text-sm font-medium leading-6 text-white">Phone Number <span class="text-gray-500 text-xs">(Optional)</span></label>
+                        <div class="mt-2">
+                            <input type="tel" name="phone" id="phone" class="block w-full rounded-md border-0 bg-gray-900/50 py-1.5 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6 pl-3">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" id="submit-btn" class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-2.5 text-sm font-bold uppercase tracking-wide leading-6 text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 transition-all duration-300">
+                        Continue
+                    </button>
+                    <div id="error-message" class="mt-4 hidden p-3 rounded-md bg-red-900/50 border border-red-500 text-red-200 text-sm text-center"></div>
+                </div>
+            </form>
+        </div>
+
+        <div id="upgrade-section" class="relative isolate hidden px-6 py-24 sm:py-32 lg:px-8 fade-enter">
+            <div class="mx-auto max-w-4xl text-center">
+                <h2 class="text-base/7 font-semibold text-indigo-400">Pricing</h2>
+                <p class="mt-2 text-5xl font-semibold tracking-tight text-balance text-white sm:text-6xl">Choose the right plan for you</p>
+            </div>
+            <p class="mx-auto mt-6 max-w-2xl text-center text-lg font-medium text-pretty text-gray-400 sm:text-xl/8">Choose an affordable plan that’s packed with the best features for engaging your audience. You can upgrade later.</p>
+
+            <div class="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+
+                <div class="pricing-card rounded-3xl rounded-t-3xl bg-white/2.5 p-8 ring-1 ring-white/10 sm:mx-8 sm:rounded-b-none sm:p-10 lg:mx-0 lg:rounded-tr-none lg:rounded-bl-3xl">
+                    <div class="flex items-center justify-between">
+                        <h3 id="tier-basic" class="text-base/7 font-semibold text-indigo-400">Free Plan</h3>
+                    </div>
+                    <p class="mt-4 flex items-baseline gap-x-2">
+                        <span class="text-5xl font-semibold tracking-tight text-white">Free</span>
+                        <span class="text-base text-gray-400">free forever</span>
+                    </p>
+                    <p class="mt-6 text-base/7 text-gray-300">The perfect start for your digital presence.</p>
+                    <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 sm:mt-10">
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            State-of-the-art, open source website builder
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            10GB Storage (25MB Max Upload)
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            QADS.cloud domain
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            100,000 Edge Requests and 10GB Data Transfer per month
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            Email Support
+                        </li>
+                    </ul>
+                    <button onclick="window.location.href='download.html'" class="w-full mt-8 block rounded-md bg-white/10 px-3.5 py-2.5 text-center text-sm font-semibold text-white inset-ring inset-ring-white/5 hover:bg-white/20 sm:mt-10">Continue Free</button>
+                </div>
+
+                <div class="pricing-card relative rounded-3xl bg-gray-800 p-8 ring-1 ring-white/10 sm:p-10">
+                    <div class="flex items-center justify-between">
+                        <h3 id="tier-pro" class="text-base/7 font-semibold text-indigo-400">Pro Plan</h3>
+                    </div>
+                    <p class="mt-4 flex items-baseline gap-x-2">
+                        <span class="text-5xl font-semibold tracking-tight text-white">US$99</span>
+                        <span class="text-base text-gray-400">one-time</span>
+                    </p>
+                    <p class="mt-6 text-base/7 text-gray-300">Complete website building tools for your brand.</p>
+                    <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 sm:mt-10">
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            State-of-the-art, open source website builder
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            Advanced developer tools
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            Custom domain 
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            1TB Storage
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            1M Edge Requests and 100GB Data Transfer per month
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            Premium Apps
+                        </li>
+                        <li class="flex gap-x-3">
+                            <svg viewBox="0 0 20 20" fill="currentColor" class="h-6 w-5 flex-none text-indigo-400"><path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" /></svg>
+                            24/7 Email Support
+                        </li>
+                    </ul>
+                    <button id="upgrade-pro-btn" class="w-full mt-8 block rounded-md bg-indigo-500 px-3.5 py-2.5 text-center text-sm font-semibold text-white hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 sm:mt-10">Get started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="accounts.js"></script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QADS Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .bg-grid-pattern {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 85%);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: #020410;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .hero-title {
+            padding-bottom: 0.1em; 
+        }
+    </style>
+</head>
+<body class="bg-[#020410] text-white font-sans antialiased selection:bg-indigo-500 selection:text-white overflow-x-hidden">
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute inset-0 bg-grid-pattern opacity-[0.15]"></div>
+        <div class="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#4F46E5] rounded-full blur-[140px] opacity-30 mix-blend-screen"></div>
+        <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-indigo-900/20 rounded-full blur-[120px] opacity-20"></div>
+    </div>
+
+    <section class="relative z-10 min-h-screen flex flex-col justify-center items-center px-6 pt-12 pb-20">
+        
+        <div class="hero-logo mb-8">
+            <img src="/qads.png" alt="QADS Logo" class="w-16 h-16 object-contain drop-shadow-2xl">
+        </div>
+
+        <div class="hero-badge mb-8 inline-flex items-center bg-white/5 border border-white/10 rounded-full p-1 pr-4 backdrop-blur-md hover:bg-white/10 transition-colors cursor-default">
+            <span class="bg-[#5c53f4] text-white text-[10px] font-bold px-2 py-0.5 rounded-full mr-3 tracking-wide uppercase shadow-lg shadow-indigo-500/50">What's new</span>
+            <span class="text-indigo-100 text-sm font-medium flex items-center">
+                Apple Intelligence Support
+            </span>
+        </div>
+
+        <h1 class="hero-title text-5xl sm:text-7xl md:text-8xl font-bold text-center tracking-tight leading-[1.15] mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-gray-400 max-w-5xl pb-2">
+            Open Source <br> state-of-the-art editor.
+        </h1>
+
+        <p class="hero-text text-lg md:text-xl text-gray-400/90 text-center max-w-2xl mb-12 leading-relaxed font-light">
+            Experience a platform that gives you complete design freedom. Drag, drop, and publish. Experience the future of web creation today.
+        </p>
+
+        <div class="hero-btns flex flex-col sm:flex-row items-center justify-center gap-6 w-full sm:w-auto">
+            <button 
+                onclick="downloadAndRedirect()" 
+                class="
+                    bg-white 
+                    text-black 
+                    font-semibold 
+                    text-xl                 py-4                    px-12                   rounded-2xl             inline-flex 
+                    items-center 
+                    justify-center 
+                    gap-3                   shadow-xl               shadow-white/20         transition-all 
+                    duration-300 
+                    hover:bg-gray-100       active:bg-gray-200      min-w-[280px]           "
+            >
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" width="20" height="auto"> 
+                Download for Mac
+            </button>
+        </div>
+        <div class="anim-element mt-8 text-sm text-gray-600">
+            Latest Version • macOS 11 Big Sur or higher is required
+        </div>
+    </section>
+
+    <section class="relative z-10 py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 faq-header tracking-tight">Frequently asked questions</h2>
+            <p class="text-gray-500 faq-sub max-w-xl mx-auto">Have a different question? Reach out to our support team at help@qads.cloud</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Why is there no Windows version?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    QADS is built entirely in SwiftUI. We utilize native macOS frameworks to render the canvas 10x faster than Electron apps. Porting to Windows would mean rewriting the core engine from scratch without these performance benefits.
+                </p>
+            </div>
+
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Can I use this in the browser?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    No. Web browsers cannot access the low-level GPU metal APIs we use for real-time rendering. The web version would lag significantly behind the native experience we aim to provide.
+                </p>
+            </div>
+
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Does it support AI?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Yes. We leverage the Neural Engine (Apple Intelligence) on Apple Silicon for on-device code generation and asset creation. These features require macOS 15+ and are not available on other platforms.
+                </p>
+            </div>
+
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Is it optimized for M1/M2/M3/M4 chips?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Absolutely. The application is compiled specifically for ARM architecture, ensuring minimal battery drain and maximum responsiveness on all Apple Silicon MacBooks. The app can still be ran on older MacBooks.
+                </p>
+            </div>
+
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Do I own the code?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    You own it. Publish the code with our own hosting platform, or export to HTML/CSS/JS with the Pro Plan.
+                </p>
+            </div>
+
+            <div class="faq-item group">
+                <h3 class="text-lg font-semibold text-white mb-3 group-hover:text-indigo-400 transition-colors">Do I need Xcode?</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    No. The QADS.cloud standalone binary includes everything you need to build and deploy.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 text-center text-gray-800 text-xs relative z-10 border-t border-white/5 mt-10">
+     2025 QADS.cloud. Beta downloads are available <a href="#"><strong>here.</strong></a>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script type="module" src="downscript.js"></script>
+    <script src="download.js"></script>
+</body>
+</html>
