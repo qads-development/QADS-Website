@@ -16,11 +16,8 @@
             <script>
                 (function() {
                     if (window.location.pathname.includes('id.html')) return;
-
                     if (localStorage.getItem('_verified-qadsid') !== 'True') {
-                        
                         const currentPage = 'contact.html';
-                        
                         window.location.href = '/id.html?currentpage=' + currentPage;
                     }
                 })();
