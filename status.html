@@ -18,7 +18,7 @@
       --muted:#91a6d9;
       --success:#34c759;
       --danger:#ff3b30;
-      --warning:#ffcc00; /* Added for visual if needed */
+      --warning:#ffcc00; 
       --glass: rgba(255,255,255,0.03);
       --card-radius:12px;
       --shadow: 0 6px 18px rgba(3,8,23,0.7);
@@ -184,7 +184,6 @@
       color:var(--muted);
     }
 
-    /* Message Alert Styling */
     .info-alert {
       margin-top: 16px;
       padding: 12px 14px;
@@ -194,7 +193,7 @@
       font-size: 13px;
       line-height: 1.5;
       color: #dbe8ff;
-      display: none; /* Hidden by default */
+      display: none; 
       animation: fadeIn 0.3s ease-out;
     }
     
@@ -204,7 +203,6 @@
       margin-bottom: 4px;
     }
 
-    /* Helper class to show the alert */
     .show-alert { display: block; }
 
     footer{
@@ -236,8 +234,7 @@
 
           if (localStorage.getItem('_verified-qadsid') !== 'True') {
               const currentPage = 'status.html';
-              // window.location.href = '/id.html?currentpage=' + currentPage;
-              // Commented out redirect for testing purposes
+              window.location.href = '/id.html?currentpage=' + currentPage;
           }
       })();
   </script>
@@ -340,12 +337,12 @@
     const services = {
       website: { upText: 'Active', downText: 'Inactive', up:true },
       hosting: { upText: 'Active', downText: 'Inactive', up:true },
-      builder: { upText: 'Active', downText: 'Inactive', up:false } // Set to FALSE
+      builder: { upText: 'Active', downText: 'Inactive', up:false } 
     };
 
     function setStatus(key){
       const s = services[key];
-      // Note: Ensure HTML IDs match 's-website', 's-hosting', 's-builder'
+      
       const statusEl = document.getElementById('s-' + key);
       const textEl = document.getElementById('st-' + key);
       
