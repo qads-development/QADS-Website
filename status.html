@@ -1,10 +1,15 @@
 <!doctype html>
 <html lang="en">
-<!-- Developped by QADS.cloud -->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Website Status</title>
+  <link rel="icon" type="image/x-icon" href="https://qads.cloud/favicon.ico">
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NBB47P39');</script>
   <style>
     :root{
       --bg:#05060a;
@@ -13,6 +18,7 @@
       --muted:#91a6d9;
       --success:#34c759;
       --danger:#ff3b30;
+      --warning:#ffcc00; /* Added for visual if needed */
       --glass: rgba(255,255,255,0.03);
       --card-radius:12px;
       --shadow: 0 6px 18px rgba(3,8,23,0.7);
@@ -178,6 +184,29 @@
       color:var(--muted);
     }
 
+    /* Message Alert Styling */
+    .info-alert {
+      margin-top: 16px;
+      padding: 12px 14px;
+      background: rgba(11, 115, 255, 0.1);
+      border: 1px solid rgba(11, 115, 255, 0.25);
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #dbe8ff;
+      display: none; /* Hidden by default */
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .info-alert strong {
+      color: #fff;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* Helper class to show the alert */
+    .show-alert { display: block; }
+
     footer{
       margin-top:30px;
       text-align:center;
@@ -190,26 +219,32 @@
     .is-down .dot{ background: var(--danger); box-shadow: 0 6px 14px rgba(255,59,48,0.14); }
     .is-down .status-text{ color:#ffd6d2; }
 
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @media (max-width:420px){
       .container{ padding:18px; margin:18px auto; }
       header { gap:12px; }
       .logo{ width:48px; height:48px; font-size:18px; border-radius:10px; }
     }
   </style>
-            <script>
-                (function() {
-                    if (window.location.pathname.includes('id.html')) return;
+  <script>
+      (function() {
+          if (window.location.pathname.includes('id.html')) return;
 
-                    if (localStorage.getItem('_verified-qadsid') !== 'True') {
-                        
-                        const currentPage = 'status.html';
-                        
-                        window.location.href = '/id.html?currentpage=' + currentPage;
-                    }
-                })();
-            </script>
+          if (localStorage.getItem('_verified-qadsid') !== 'True') {
+              const currentPage = 'status.html';
+              // window.location.href = '/id.html?currentpage=' + currentPage;
+              // Commented out redirect for testing purposes
+          }
+      })();
+  </script>
 </head>
 <body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NBB47P39"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container" role="main">
     <header>
       <div class="logo" aria-hidden="true">S</div>
@@ -220,8 +255,7 @@
     </header>
 
     <section class="grid" aria-label="status cards">
-      <!-- Card -->
-      <article class="card" id="card-website" data-service="Website" aria-labelledby="t-website">
+      <article class="card" id="card-website" data-service="Website">
         <div>
           <div class="card-head">
             <div>
@@ -235,11 +269,10 @@
           </div>
 
           <div class="meta">
-            <div class="badge">Region: San Diego</div>
-            <div class="small">Uptime this month: <strong id="u-website">99.97%</strong></div>
+            <div class="badge">Region: Montreal, QC</div>
+            <div class="small">Uptime this month: <strong id="u-website">99.87%</strong></div>
           </div>
         </div>
-
         <div style="display:flex;justify-content:flex-end;margin-top:12px;">
           <div class="controls">
             <button class="btn ghost" onclick="openDetails('website')">Details</button>
@@ -247,29 +280,53 @@
         </div>
       </article>
 
-      <!-- Card -->
-      <article class="card" id="card-flair" data-service="Flair" aria-labelledby="t-flair">
+      <article class="card" id="card-hosting" data-service="Hosting">
         <div>
           <div class="card-head">
             <div>
-              <div id="t-flair" class="title">Hosting</div>
+              <div id="t-hosting" class="title">Hosting</div>
               <div class="info">QADS online hosting</div>
             </div>
-            <div id="s-flair" class="status is-up" aria-live="polite">
+            <div id="s-hosting" class="status is-up" aria-live="polite">
               <div class="dot" aria-hidden="true"></div>
-              <div class="status-text" id="st-flair">Active</div>
+              <div class="status-text" id="st-hosting">Active</div>
             </div>
           </div>
 
           <div class="meta">
             <div class="badge">Cluster: host-prod</div>
-            <div class="small">Latency today: <strong id="u-flair">4-8ms</strong></div>
+            <div class="small">Latency today: <strong id="u-hosting">4-8ms</strong></div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;margin-top:12px;">
+          <div class="controls">
+            <button class="btn ghost" onclick="openDetails('hosting')">Details</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" id="card-builder" data-service="Builder">
+        <div>
+          <div class="card-head">
+            <div>
+              <div id="t-builder" class="title">Builder</div>
+              <div class="info">QADS Mobile Builder</div>
+            </div>
+            <div id="s-builder" class="status is-up" aria-live="polite">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="status-text" id="st-builder">Active</div>
+            </div>
+          </div>
+
+          <div id="alert-builder" class="info-alert show-alert">
+            <strong>Update</strong>
+            Issue started: 2025-12-11 at 5:12:32pm. Our team is working hard on figuring out the issue. Please note that existing apps are still up and running.
           </div>
         </div>
 
         <div style="display:flex;justify-content:flex-end;margin-top:12px;">
           <div class="controls">
-            <button class="btn ghost" onclick="openDetails('hosting')">Details</button>
+            <button class="btn ghost" onclick="openDetails('builder')">Details</button>
           </div>
         </div>
       </article>
@@ -282,14 +339,18 @@
   <script>
     const services = {
       website: { upText: 'Active', downText: 'Inactive', up:true },
-      hosting:   { upText: 'Active', downText: 'Inactive', up:true }
+      hosting: { upText: 'Active', downText: 'Inactive', up:true },
+      builder: { upText: 'Active', downText: 'Inactive', up:false } // Set to FALSE
     };
 
     function setStatus(key){
       const s = services[key];
+      // Note: Ensure HTML IDs match 's-website', 's-hosting', 's-builder'
       const statusEl = document.getElementById('s-' + key);
       const textEl = document.getElementById('st-' + key);
+      
       if (!statusEl || !textEl) return;
+      
       if (s.up){
         statusEl.classList.remove('is-down');
         statusEl.classList.add('is-up');
@@ -309,7 +370,6 @@
       alert(key.toUpperCase() + ' is currently ' + state + '.');
     }
 
-    // initialize
     Object.keys(services).forEach(k => setStatus(k));
   </script>
 </body>
