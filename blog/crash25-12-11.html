@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Developped by QADS.cloud -->
+<!-- Blog -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QADS.cloud Blog</title>
+    <style>
+        :root {
+            --brand-purple: #6a4cff;
+            --brand-purple-hover: #5a3de0;
+            --text-primary: #f0f1f3;
+            --text-secondary: #aeb4c0;
+            --bg-dark: #0c0a10;
+            --border-color: #3a3a4a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            background-image: 
+                radial-gradient(circle at 80% 20%, rgba(74, 58, 107, 0.4) 0%, transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(74, 58, 107, 0.3) 0%, transparent 35%);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .content-container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2.5rem 3rem;
+        }
+
+        .content-container h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--text-primary);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .content-container h3 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .content-container p,
+        .content-container li {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .content-container ul {
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-container a {
+            color: var(--brand-purple);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .content-container a:hover {
+            color: var(--brand-purple-hover);
+            text-decoration: underline;
+        }
+
+        .content-container .last-updated {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+    </style>
+    <script>
+        (function() {
+            if (window.location.pathname.includes('id.html')) return;
+
+            if (localStorage.getItem('_verified-qadsid') !== 'True') {
+                
+                const currentPage = 'blog/crash25-12-11.html';
+                
+                window.location.href = '/id.html?currentpage=' + currentPage;
+            }
+        })();
+    </script>
+</head>
+<body>
+    <div class="content-container">
+        <h2>Crash of December 11th 2025</h2>
+        <p>Issue has been found. Editor will be back up Monday, December 15th 2025</p>
+
+        <h3>Explanation</h3>
+        <p>3 servers have crashed due to GPU issues. New infrastructure is on the way, but the builder might be down for a couple of days. Every client affected will be offered 3-months of gold plan in compensation.
+        </p>
+        
+        <h3>Contact</h3>
+        <p>If you have any questions, please contact us at <a href="mailto:help@qads.cloud">help@qads.cloud</a>.</p>
+    </div>
+
+</body>
+</html>
