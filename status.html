@@ -18,7 +18,7 @@
       --muted:#91a6d9;
       --success:#34c759;
       --danger:#ff3b30;
-      --warning:#ffcc00; 
+      --warning:#ffcc00;
       --glass: rgba(255,255,255,0.03);
       --card-radius:12px;
       --shadow: 0 6px 18px rgba(3,8,23,0.7);
@@ -193,7 +193,7 @@
       font-size: 13px;
       line-height: 1.5;
       color: #dbe8ff;
-      display: none; 
+      display: none;
       animation: fadeIn 0.3s ease-out;
     }
     
@@ -267,7 +267,7 @@
 
           <div class="meta">
             <div class="badge">Region: Montreal, QC</div>
-            <div class="small">Uptime this month: <strong id="u-website">99.87%</strong></div>
+            <div class="small">Uptime this month: <strong id="u-website">99.89%</strong></div>
           </div>
         </div>
         <div style="display:flex;justify-content:flex-end;margin-top:12px;">
@@ -282,7 +282,7 @@
           <div class="card-head">
             <div>
               <div id="t-hosting" class="title">Hosting</div>
-              <div class="info">QADS online hosting</div>
+              <div class="info">QADS Server Hosting. Includes authentication, back-end, app storage, and more. Runs on one primary server.</div>
             </div>
             <div id="s-hosting" class="status is-up" aria-live="polite">
               <div class="dot" aria-hidden="true"></div>
@@ -317,7 +317,8 @@
 
           <div id="alert-builder" class="info-alert show-alert">
             <strong>Update</strong>
-            Issue started: 2025-12-11 at 5:12:32pm. Our team is working hard on figuring out the issue. Please note that existing apps are still up and running.
+            Issue started: 2025-12-11 at 5:12:32pm. Our team has identified the issue.
+            <a href="blog/crash25-12-11.html">See Issue</a>
           </div>
         </div>
 
@@ -337,12 +338,11 @@
     const services = {
       website: { upText: 'Active', downText: 'Inactive', up:true },
       hosting: { upText: 'Active', downText: 'Inactive', up:true },
-      builder: { upText: 'Active', downText: 'Inactive', up:false } 
+      builder: { upText: 'Active', downText: 'Inactive', up:false }
     };
 
     function setStatus(key){
       const s = services[key];
-      
       const statusEl = document.getElementById('s-' + key);
       const textEl = document.getElementById('st-' + key);
       
